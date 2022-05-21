@@ -72,7 +72,7 @@ section h2 {
   margin-bottom: 1.6rem;
 }
 
-section::after {
+section:nth-child(n + 3):before {
   content: "";
   width: 100%;
   height: 1px;
@@ -80,12 +80,12 @@ section::after {
   display: block;
 
   position: relative;
-  top: 8rem;
+  top: -8rem;
 
   background: var(--primary-gradient);
 }
 
-section:nth-child(odd):after {
+section:nth-child(even)::before {
   transform: scaleX(-1);
 }
 
@@ -105,12 +105,24 @@ section:nth-child(even) {
 .wrapper {
   width: min(50rem, 100%);
   margin-inline: auto;
+}
+
+.content {
   padding-inline: 2.4rem;
+}
+
+.colA {
+  grid-area: A;
+}
+
+.colB {
+  grid-area: B;
 }
 
 /* CUSTOM COLORS */
 .logo path[fill*="#69B99D"],
-.card path {
+.card path,
+#backToTopButton circle {
   fill: var(--primary);
 }
 
@@ -157,11 +169,20 @@ nav button {
   cursor: pointer;
 }
 
-nav .close-menu,
-nav .menu {
+.close-menu,
+.menu {
   position: fixed;
 
   visibility: hidden;
+  opacity: 0;
+}
+
+.menu {
+  transform: translateY(100%);
+}
+
+.close-menu {
+  transform: translateY(-200%);
 }
 
 /* MENU-EXPANDED ================================ */
@@ -176,6 +197,9 @@ body.menu-expanded > :not(.close-menu, .nav) {
 body.menu-expanded .menu,
 body.menu-expanded .close-menu {
   visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition: 300ms;
 }
 
 body.menu-expanded .close-menu {
@@ -208,10 +232,42 @@ body.menu-expanded .menu {
 
 /* HOME ================================ */
 #home {
-  padding-top: calc(3.2rem + var(--nav-heigth));
+  padding-top: calc(5rem + var(--nav-heigth));
   padding-bottom: 8rem;
 
   text-align: center;
+
+  overflow: hidden;
+}
+
+#home .img {
+  position: relative;
+  /* padding-top: 5rem; */
+  margin-block: 3.2rem;
+}
+
+#home .img::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--primary);
+
+  display: block;
+
+  position: absolute;
+  bottom: 5rem;
+  left: 5rem;
+}
+
+#home .img img {
+  position: relative;
+  right: 4rem;
+}
+
+.img img,
+.img::before {
+  border-radius: 0.4rem;
 }
 
 #home h1 {
@@ -222,6 +278,31 @@ body.menu-expanded .menu {
   margin-bottom: 3.2rem;
 
   line-height: 2.1rem;
+}
+
+/* ABOUT ================================ */
+#about .img {
+  position: relative;
+
+  margin-bottom: 3.2rem;
+}
+
+#about .img::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+
+  background: var(--primary);
+
+  position: absolute;
+
+  bottom: 10%;
+  right: 34%;
+  z-index: 0;
+}
+
+#about .img img {
+  position: relative;
 }
 
 /* SERVICES ================================ */
@@ -270,10 +351,6 @@ body.menu-expanded .menu {
 }
 
 /* COMMENTS ================================ */
-#comments h2 {
-  margin-bottom: 6.4rem;
-}
-
 #comments .post {
   padding: 3.2rem;
   border-radius: 0.4rem;
@@ -301,6 +378,19 @@ body.menu-expanded .menu {
   height: 3.2rem;
   object-fit: cover;
   border-radius: 100rem;
+}
+
+/* SLIDER */
+.swiper {
+  width: 100%;
+  padding: 6rem 1rem;
+}
+
+.swiper-slide {
+  height: auto;
+}
+.swiper-pagination-bullet {
+  background-color: var(--primary);
 }
 
 /* CONTACT ================================ */
@@ -333,6 +423,7 @@ body.menu-expanded .menu {
   gap: 1.2rem;
 }
 
+/* FOOTER ================================ */
 footer {
   background: var(--primary);
 
@@ -351,4 +442,187 @@ footer p {
 footer ul {
   display: flex;
   gap: 3.2rem;
+}
+
+/* BackToTopButton ================================ */
+#backToTopButton {
+  position: fixed;
+  right: 2.3rem;
+  bottom: 1rem;
+
+  opacity: 0;
+
+  transform: translateY(100%);
+
+  transition: 300ms;
+}
+
+#backToTopButton.showButton {
+  transform: translateY(0);
+
+  opacity: 1;
+}
+
+/* RESPONSIVE ================================ */
+@media (min-width: 1024px) {
+  .wrapper {
+    width: min(112rem, 100%);
+
+    display: grid;
+  }
+
+  body {
+    overflow: auto;
+  }
+
+  .content {
+    padding-inline: 10rem;
+  }
+
+  section {
+    scroll-margin-top: 2rem;
+  }
+
+  section#services header,
+  section#comments header {
+    text-align: center;
+  }
+
+  /* NAVIGATION +========== */
+  /* RESET */
+  nav .wrapper * {
+    margin: 0;
+    padding: 0;
+    display: initial;
+    position: initial;
+    opacity: initial;
+    color: initial;
+    visibility: initial;
+    transform: none;
+    font-size: initial;
+  }
+
+  nav .open-menu,
+  nav .close-menu {
+    display: none;
+  }
+
+  nav .menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 3.2rem;
+  }
+
+  /* HOME +========== */
+  #home .wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "B A";
+  }
+
+  #home .content {
+    align-self: center;
+    text-align: left;
+  }
+
+  #home .content h1 {
+    font-size: 3.6rem;
+    line-height: 5.4rem;
+  }
+
+  #home .content p {
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+  }
+
+  #home .colA {
+    display: flex;
+    justify-self: end;
+  }
+
+  #home .colB {
+    align-self: center;
+  }
+
+  #home .colB a {
+    display: inline-block;
+  }
+
+  /* ABOUT +========== */
+  #about .wrapper {
+    grid-template-columns: 35rem 1fr;
+    grid-template-areas: "A B";
+  }
+
+  #about .img {
+    margin: 0;
+    align-self: center;
+  }
+
+  #about .img img {
+    height: 40rem;
+    width: auto;
+    left: -50%;
+  }
+
+  #about .img::before {
+    left: -70%;
+  }
+
+  /* SERVICES +========== */
+  section#services header p {
+    margin-inline: auto;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+
+    width: 60%;
+  }
+
+  section#services .cards {
+    flex-direction: row;
+  }
+
+  section#services .card {
+    flex: 1;
+    flex-grow: 1;
+  }
+
+  /* COMMENTS +========== */
+  #comments h2 {
+    width: 60%;
+    margin-inline: auto;
+  }
+
+  /* CONTACT +========== */
+  section#contact .wrapper {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "A B";
+  }
+
+  section#contact .colA,
+  section#contact .colB {
+    align-self: center;
+  }
+
+  section#contact a {
+    margin: 0;
+  }
+
+  section#contact .colB {
+    justify-self: center;
+  }
+
+  /* FOOTER +========== */
+  footer .wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "A B";
+  }
+
+  footer p {
+    margin: 0;
+  }
+
+  footer .colB {
+    align-self: center;
+    justify-self: end;
+  }
 }
