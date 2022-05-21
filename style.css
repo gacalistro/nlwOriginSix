@@ -385,6 +385,10 @@ body.menu-expanded .menu {
   border-radius: 100rem;
 }
 
+#comments .post cite {
+  font-style: normal;
+}
+
 /* SLIDER */
 .swiper {
   width: 100%;

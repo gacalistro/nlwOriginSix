@@ -48,7 +48,6 @@ function activeStyleAtCurrentSection(section) {
 
   if (sectionBoundaries) {
     menuElement.classList.add("active");
-    console.log(sectionId);
   }
 }
 
