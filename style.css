@@ -3,6 +3,7 @@
   --hue: 280;
   --primary: hsl(var(--hue), 36%, 57%);
   --primary-light: hsl(var(--hue), 65%, 88%);
+  --primary-hover: hsl(var(--hue) 57% 53%);
   --primary-gradient: linear-gradient(
     270deg,
     hsl(var(--hue), 36%, 57%) 0%,
@@ -355,6 +356,10 @@ body.menu-expanded .menu {
   padding: 3.2rem;
   border-radius: 0.4rem;
   box-shadow: var(--box-shadow);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 #comments .post p:first-child {
@@ -511,6 +516,35 @@ footer ul {
     display: flex;
     flex-direction: row;
     gap: 3.2rem;
+  }
+
+  nav .menu ul li a:hover,
+  nav .menu ul li a.active {
+    color: var(--primary-hover);
+
+    transition: 300ms;
+  }
+
+  nav .menu ul li a::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+
+    display: block;
+
+    position: relative;
+    top: 2.3rem;
+    left: -0.8rem;
+
+    background-color: var(--primary-hover);
+
+    transition: 300ms;
+  }
+
+  nav .menu ul li a.active::after,
+  nav .menu ul li a:hover::after {
+    width: 100%;
+    padding-inline: 0.8rem;
   }
 
   /* HOME +========== */
