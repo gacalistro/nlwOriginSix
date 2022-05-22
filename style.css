@@ -191,7 +191,7 @@ body.menu-expanded {
   overflow: hidden;
 }
 
-body.menu-expanded > :not(.close-menu, .nav) {
+body.menu-expanded > :not(nav) {
   visibility: hidden;
 }
 
@@ -200,7 +200,19 @@ body.menu-expanded .close-menu {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
-  transition: 300ms;
+  transition: transform 300ms;
+
+  background: var(--bg);
+}
+
+body.menu-expanded .logo,
+body.menu-expanded .open-menu {
+  visibility: hidden;
+}
+
+body.menu-expanded nav {
+  background: none;
+  border: none;
 }
 
 body.menu-expanded .close-menu {
